@@ -1,0 +1,74 @@
+Class interfaces+
+A database in your browser+
+Selecting data+
+Ordering data+
+Selecting specific data rows+
+Selecting a range of data+
+Ordering selected data+
+Limiting data+
+Inserting new data+
+Updating existing data+
+Deleting data+
+Creating a new table+
+Truncating data+
+Deleting a table+
+JOINs-----------------------------------------
+UNION vs UNION ALL-
+NULL handling: COALESCE & Native NULL handling-
+Subqueries: IN, EXISTS, and inline views+
+Functions, Stored Procedures, Packages+
+Pivoting data: CASE & PIVOT syntax-
+Hierarchical Queries-
+Cursors: Implicit and Explicit-
+Triggers-
+Dynamic SQL-
+Materialized Views-
+Query Optimization: Indexes+
+Query Optimization: Explain Plans-
+
+
+Query Optimization: Profiling-
+Data Modelling: Normal Forms, 1 through 3-
+Data Modelling: Primary & Foreign Keys+
+Data Modelling: Table Constraints+
+Data Modelling: Link/Corrollary Tables-
+Full Text Searching+
+XML+
+Isolation Levels-
+Entity Relationship Diagrams (ERDs), Logical and Physical-
+Transactions: COMMIT, ROLLBACK, Error Handling-
+Creating Json Response - All elements+
+Creating Json Response - Individual elements+
+Status Codes+
+Validation+
+Serializer Fields and Core+
+Custom Serializer Fields+
+Updating Models+
+Django Relationships+
+Nested Serializers+
+Serializer Relations+
+HyperLinked Model Serializer+
+
+
+
+
+URL Structure+
+Concrete View Classes-
+Overwrite Queryset+
+Routers+
+Temporary Login and Logout+
+Custom Permissions+
+Custom Calculation+
+Manual Testing Entire Project+
+Throttling-
+Automated API Testing+
+WEBsockets-
+Queue management-
+Celery-
+Rabbit mq-
+Introduction-
+Build new celery instance-
+Create new task-
+Run task with Celery-
+Getting results of tasks-
+
