@@ -1,7 +1,7 @@
 from rest_framework.permissions import BasePermission
 from rest_framework.permissions import SAFE_METHODS
 
-class IsDoctor(BasePermission): #Medical staff can get only info, if doctor worked on patient can touch data.
+class IsDoctor(BasePermission): #Medical staff can GET only info, if doctor worked on patient can touch data.
     def has_permission(self, request, view):
         return bool(request.user and request.user.user_type == "1")
 

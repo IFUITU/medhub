@@ -44,8 +44,8 @@ class ChangePassView(APIView):#change my own password
         if serialized.is_valid():
             user_obj.set_password(serialized.validated_data.get('new'))
             user_obj.save()
-            return Response({"data":serialized.data,"ok":True}, status=200)
-        return Response({"data":serialized.errors,"ok":False}, status=404)
+            return Response({"data":serialized.data}, status=200)
+        return Response({"data":serialized.errors}, status=400)
 
 
 class LogApi(APIView):
@@ -65,7 +65,7 @@ class LogApi(APIView):
         user = authenticate(username=username, password=password)
         
         if user is None:
-            return Response({'error':"User or password is not valid!"}, status=404)
+            return Response({'error':"User or password is not valid!"}, status=400)
         token, create = Token.objects.get_or_create(user=user) #creates token for authenticated user
         return Response({"token":token.key, 
                          "user":{'username':user.username,'id':user.id}
@@ -75,7 +75,7 @@ class LogApi(APIView):
         if request.user.is_authenticated:
             request.auth.delete() #removes authenticated token
             return Response({"data":"Come back soon!"}, status=200)
-        return Response({"data":"Something wrong!"}, status=404)
+        return Response({"data":"Something wrong!"}, status=400)
 
 
 
