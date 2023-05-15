@@ -41,7 +41,7 @@ class AccountsTest(APITestCase):
             password=make_password('123'),
             user_type="1"
             )
-    
+
     def activate_credentials(self, username, password):
         res = self.client.post(f'{HOSTNAME}/log/', {
             'username':username,

@@ -6,7 +6,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import PatientFile, PatientHistory
 from .filters import PatientHistoryFilter
-from .permissions import IsDoctor
+from .permissions import IsDoctor, IsPatientsDoctor, IsDoctorForFile
 from .serializers import (
     PatientHistorySerializer, PatientFileCreateSerializer, 
     PatientFileSerializer, GroupedPatientInfoSerializer
@@ -16,7 +16,7 @@ from .serializers import (
 class PatientHistoryViewSet(ModelViewSet):
     serializer_class = PatientHistorySerializer
     queryset = PatientHistory.objects.all()
-    permission_classes = [IsDoctor]
+    permission_classes = [IsPatientsDoctor]
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -43,7 +43,7 @@ class PatientHistoryViewSet(ModelViewSet):
 class PatientFileViewset(ModelViewSet):
     serializer_class = PatientFileSerializer
     queryset = PatientFile.objects.all()
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsDoctorForFile]
 
     def get_serializer_class(self):
         if self.action == "create":
@@ -55,7 +55,7 @@ class PatientFileViewset(ModelViewSet):
 class PatientHistoryFilter(ListAPIView):
     queryset = PatientHistory.objects.all()
     serializer_class = PatientHistorySerializer
-    permission_classes = [IsDoctor, IsAdminUser]
+    permission_classes = [IsDoctor]
     filter_backends = [SearchFilter, DjangoFilterBackend]
     filter_class = PatientHistoryFilter
     filterset_fields = ['patient_name', "patient_birth_date", "patient_med_condition"]
