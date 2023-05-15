@@ -93,81 +93,81 @@ class PatientHistoryTest(APITestCase):
         return tmp_file
 
 
-    # def test_history_as_patient_user(self):
-    #     self.activate_credentials('patient_1', '123')
+    def test_history_as_patient_user(self):
+        self.activate_credentials('patient_1', '123')
 
-    #     #access to patient history as patient user
-    #     res = self.client.get(f"{HOST}/patient-history/", format='json')
-    #     self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+        #access to patient history as patient user
+        res = self.client.get(f"{HOST}/patient-history/", format='json')
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
 
-    #     #UPDATE
-    #     res = self.client.patch(f"{HOST}/patient-history/{self.ph_1.id}/", 
-    #                             {"patient_name":"patient_name"}, format='json')
-    #     self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+        #UPDATE
+        res = self.client.patch(f"{HOST}/patient-history/{self.ph_1.id}/", 
+                                {"patient_name":"patient_name"}, format='json')
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
 
-    #     #delete
-    #     res = self.client.delete(f"{HOST}/patient-history/{self.ph_1.id}/", format='json')
-    #     self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+        #delete
+        res = self.client.delete(f"{HOST}/patient-history/{self.ph_1.id}/", format='json')
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
 
 
-    # def test_history_as_doctor_user(self):
-    #     """Only doctors who worked with patient 
-    #     can touch patients' history data, other doctors can't"""
-    #     self.activate_credentials('doctor_1', '123')
+    def test_history_as_doctor_user(self):
+        """Only doctors who worked with patient 
+        can touch patients' history data, other doctors can't"""
+        self.activate_credentials('doctor_1', '123')
         
-    #     #create new history with multiple files 
-    #     res = self.client.post(f"{HOST}/patient-history/", 
-    #         { 
-    #             'patient_name':"patient_2",
-    #             'patient_birth_date':"2000-05-06",
-    #             'patient':self.patient_2.id,
-    #             'doctor':[self.doctor_1.id, self.doctor_3.id],
-    #             'uploaded_files':[self.make_image_file(), self.make_image_file()],
-    #             'patient_med_condition':"Med condition of patient_1 is good!",
-    #         }, format='multipart')
-    #     self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        #create new history with multiple files 
+        res = self.client.post(f"{HOST}/patient-history/", 
+            { 
+                'patient_name':"patient_2",
+                'patient_birth_date':"2000-05-06",
+                'patient':self.patient_2.id,
+                'doctor':[self.doctor_1.id, self.doctor_3.id],
+                'uploaded_files':[self.make_image_file(), self.make_image_file()],
+                'patient_med_condition':"Med condition of patient_1 is good!",
+            }, format='multipart')
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
-    #     #access history as doctor user
-    #     res = self.client.get(f"{HOST}/patient-history/", format='json')
-    #     self.assertEqual(res.status_code, status.HTTP_200_OK)
+        #access history as doctor user
+        res = self.client.get(f"{HOST}/patient-history/", format='json')
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
 
-    #     #update history as doctor
-    #     res = self.client.patch(f"{HOST}/patient-history/{self.ph_1.id}/", 
-    #                             {"patient_name":"patient_name"}, format='json')
-    #     self.assertEqual(res.status_code, status.HTTP_200_OK)
+        #update history as doctor
+        res = self.client.patch(f"{HOST}/patient-history/{self.ph_1.id}/", 
+                                {"patient_name":"patient_name"}, format='json')
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
 
-    #     #delete patient_history
-    #     res = self.client.delete(f"{HOST}/patient-history/{self.ph_1.id}/", format="json")
-    #     self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
+        #delete patient_history
+        res = self.client.delete(f"{HOST}/patient-history/{self.ph_1.id}/", format="json")
+        self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
 
-    # def test_files_as_doctor(self):
-    #     """Only doctors who worked with patient 
-    #     can touch patients' files data, other doctors can't"""
+    def test_files_as_doctor(self):
+        """Only doctors who worked with patient 
+        can touch patients' files data, other doctors can't"""
 
-    #     self.activate_credentials('doctor_2', '123')
+        self.activate_credentials('doctor_2', '123')
         
-    #     #create new multiple file
-    #     res = self.client.post(f"{HOST}/patient-file/", 
-    #         {
-    #             'patient_history': self.ph_1.id,
-    #             'file':[self.make_image_file()],
-    #         }, format='multipart')
-    #     self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        #create new multiple file
+        res = self.client.post(f"{HOST}/patient-file/", 
+            {
+                'patient_history': self.ph_1.id,
+                'file':[self.make_image_file()],
+            }, format='multipart')
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
-    #     #access file as doctor user
-    #     res = self.client.get(f"{HOST}/patient-file/{self.pf_1.id}/", format='json')
-    #     self.assertEqual(res.status_code, status.HTTP_200_OK)
+        #access file as doctor user
+        res = self.client.get(f"{HOST}/patient-file/{self.pf_1.id}/", format='json')
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
 
-    #     #update file as doctor
-    #     res = self.client.patch(f"{HOST}/patient-file/{self.ph_1.id}/", 
-    #         {
-    #             'file':[self.make_image_file()],
-    #         }, format='multipart')
-    #     self.assertEqual(res.status_code, status.HTTP_200_OK)
+        #update file as doctor
+        res = self.client.patch(f"{HOST}/patient-file/{self.ph_1.id}/", 
+            {
+                'file':[self.make_image_file()],
+            }, format='multipart')
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
         
-    #     #delete file
-    #     res = self.client.delete(f"{HOST}/patient-file/{self.ph_1.id}/", format="json")
-    #     self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
+        #delete file
+        res = self.client.delete(f"{HOST}/patient-file/{self.ph_1.id}/", format="json")
+        self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_filters_as_doctor(self):
         search_val = "name" #search via name, birth_date, med_condition
