@@ -149,6 +149,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+#CSRF_ORIGINS
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost",
+    "http://127.0.0.1:1888",
+    "http://localhost:3000",
+    "https://localhost:3000",
+    "http://localhost:3001",
+    "https://localhost:3001",
+    "http://0.0.0.0",
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -167,7 +177,5 @@ MAX_UPLOAD_SIZE = "5242880"
 
 #auth-model
 AUTH_USER_MODEL = 'accounts.User'
-
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
