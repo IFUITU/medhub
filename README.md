@@ -50,6 +50,7 @@
 Only Doctors can upload Files or create new patient histories.
 
 1. http://127.0.0.1:1888/api/patient-history/ 
+    - You can send multiple files in one request.
     - send POST method with following data via POSTMAN or VsCode Thunder Client e.t.c.
     - ![Django example](./example.png)
 
