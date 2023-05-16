@@ -18,14 +18,14 @@
 
 3. Run this command `docker compose up -d --build`.
     - This installs used packages from `requirements.txt` file.
-    - Creates and runs tree containers. NGINX, OUR_DJANGO APPLICATION and POSTGRES.
+    - Creates and runs three containers. NGINX, OUR_DJANGO APPLICATION and POSTGRES.
 
 5. Run  - `docker compose exec web python3 manage.py createsuperuser`.
-    To create superuser.
+    - To create superuser.
 
 6. `http://127.0.0.1:1888/` access this host from browther.
 
-## Get Auth Token Token
+## Get Auth Token 
 1. First authenticate as Doctor user http://127.0.0.1:1888/user/ with following datas via POST method.
     ```
     {
@@ -49,8 +49,9 @@
 
 Only Doctors can upload Files or create new patient histories.
 
-1. http://127.0.0.1:1888/api/patient-history/ send POST method with following data via POSTMAN or VsCode Thunder Client e.t.c.
-    ![Django example](./example.png)
+1. http://127.0.0.1:1888/api/patient-history/ 
+    - send POST method with following data via POSTMAN or VsCode Thunder Client e.t.c.
+    - ![Django example](./example.png)
 
 
 ## To run tests
