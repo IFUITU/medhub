@@ -49,10 +49,10 @@
 
 Only Doctors can upload Files or create new patient histories.
 
-1. http://127.0.0.1:1888/api/patient-history/ send POST method with following data via POSTMAN or VsCode Thunder Client e.t.c:
+1. http://127.0.0.1:1888/api/patient-history/ send POST method with following data via POSTMAN or VsCode Thunder Client e.t.c.
     ![Django example](./example.png)
 
 
 ## To run tests
-1. Run `docker compose exec web python3 manage.py test`
-    This command tests for accounts app and for main app!
+1. Run `docker compose exec web python3 manage.py test`.
+    - This command tests for accounts app and for main app!
