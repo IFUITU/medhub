@@ -36,6 +36,7 @@ class PatientHistoryViewSet(ModelViewSet):
                     grouped_by_history[patinet_history] = {
                         'patient_history':patinet_history,
                         'patient_files':[file]}
+            print(grouped_by_history)
             return grouped_by_history.values()
         return super().get_queryset()
 
