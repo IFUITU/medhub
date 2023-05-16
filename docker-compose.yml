@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+
+    command: "gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+    
+    volumes: 
+      - .:/app
+      - static_volume:/app/static
+      - media_volume:/app/media
+
+    env_file: ./.env
+
+    ports:
+      - 8000:80
+
+    image: medhub:v1.0
+
+    expose: 
+      - 8000
+    
+    depends_on:
+      - db
+
+    networks:
+      - medhub-network
+
+    restart: "on-failure"
+  
+  db:
+    image: postgres:14.3-alpine
+    # hostname: db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+    env_file:
+      - ./.env
+
+    ports:
+      - "5435:5432"
+
+    environment: 
+    - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    - POSTGRES_DB=${DB_NAME}
+    - PGPORT=${DB_PORT}
+    - POSTGRES_USER=${POSTGRES_USER}
+
+    networks:
+      - medhub-network
+
+    restart: "on-failure"
+
+  ngnix:
+    build: ./nginx
+
+    ports:
+      - 1888:80
+      - 443:443
+
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/media
+    
+    depends_on:
+      - web
+
+    networks:
+      - medhub-network
+
+    restart: "on-failure"
+
+networks:
+  medhub-network:
+    name: medhub-network
+
+volumes:
+  static_volume:
+  postgres_data:
+  media_volume:
