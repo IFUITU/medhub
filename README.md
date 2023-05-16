@@ -17,8 +17,8 @@
    ```
 
 3. Run this command `docker compose up -d --build`.
-    This installs used packages from `requirements.txt` file.
-    Creates and runs tree containers. NGINX, OUR_DJANGO APPLICATION and POSTGRES.
+    - This installs used packages from `requirements.txt` file.
+    - Creates and runs tree containers. NGINX, OUR_DJANGO APPLICATION and POSTGRES.
 
 5. Run  - `docker compose exec web python3 manage.py createsuperuser`.
     To create superuser.
